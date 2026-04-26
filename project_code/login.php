@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim((string) ($_POST['email'] ?? ''));
     $password = (string) ($_POST['password'] ?? '');
 
-    $stmt = db()->prepare('SELECT id, password_hash FROM users WHERE email = ?');
+    $stmt = auth_db()->prepare('SELECT id, password_hash FROM users WHERE email = ?');
     $stmt->execute([$email]);
     $userRow = $stmt->fetch();
 

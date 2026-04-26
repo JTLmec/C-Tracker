@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$errors) {
         try {
-            $stmt = db()->prepare(
+            $stmt = auth_db()->prepare(
                 'INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)'
             );
             $stmt->execute([
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 password_hash($password, PASSWORD_DEFAULT),
             ]);
 
-            $_SESSION['user_id'] = (int) db()->lastInsertId();
+            $_SESSION['user_id'] = (int) auth_db()->lastInsertId();
             flash('success', 'Account created successfully.');
             redirect('dashboard.php');
         } catch (PDOException $exception) {

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Quantity must be greater than zero.';
     }
 
-    $stmt = db()->prepare(
+    $stmt = tracker_db()->prepare(
         'SELECT id, emission_factor FROM activity_types WHERE id = ? AND is_active = 1'
     );
     $stmt->execute([$activityTypeId]);
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $emissionFactor = (float) $type['emission_factor'];
         $carbonKg = round($quantityValue * $emissionFactor, 2);
 
-        $stmt = db()->prepare(
+        $stmt = tracker_db()->prepare(
             'INSERT INTO activities
                 (user_id, activity_type_id, activity_date, quantity, emission_factor, carbon_kg, notes)
              VALUES

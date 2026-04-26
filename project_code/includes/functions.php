@@ -75,7 +75,7 @@ function current_user(): ?array
         return null;
     }
 
-    $stmt = db()->prepare('SELECT id, full_name, email, created_at FROM users WHERE id = ?');
+    $stmt = auth_db()->prepare('SELECT id, full_name, email, created_at FROM users WHERE id = ?');
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch();
 
@@ -96,7 +96,7 @@ function require_login(): array
 
 function get_activity_types(): array
 {
-    $stmt = db()->query(
+    $stmt = tracker_db()->query(
         'SELECT id, category, name, unit, emission_factor, recommendation
          FROM activity_types
          WHERE is_active = 1
@@ -119,7 +119,7 @@ function get_activity_type_groups(): array
 
 function get_dashboard_totals(int $userId): array
 {
-    $stmt = db()->prepare(
+    $stmt = tracker_db()->prepare(
         "SELECT
             COALESCE(SUM(carbon_kg), 0) AS total,
             COALESCE(SUM(CASE WHEN activity_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) THEN carbon_kg ELSE 0 END), 0) AS week_total,
@@ -140,7 +140,7 @@ function get_dashboard_totals(int $userId): array
 
 function get_average_daily_footprint(int $userId): float
 {
-    $stmt = db()->prepare(
+    $stmt = tracker_db()->prepare(
         'SELECT
             COALESCE(SUM(carbon_kg), 0) AS total,
             COUNT(DISTINCT activity_date) AS active_days
@@ -159,7 +159,7 @@ function get_average_daily_footprint(int $userId): float
 
 function get_category_breakdown(int $userId): array
 {
-    $stmt = db()->prepare(
+    $stmt = tracker_db()->prepare(
         'SELECT at.category, COALESCE(SUM(a.carbon_kg), 0) AS total
          FROM activities a
          INNER JOIN activity_types at ON at.id = a.activity_type_id
@@ -174,7 +174,7 @@ function get_category_breakdown(int $userId): array
 
 function get_recent_activities(int $userId, int $limit = 8): array
 {
-    $stmt = db()->prepare(
+    $stmt = tracker_db()->prepare(
         'SELECT a.id, a.activity_date, a.quantity, a.carbon_kg, a.notes,
                 at.category, at.name, at.unit
          FROM activities a
@@ -190,7 +190,7 @@ function get_recent_activities(int $userId, int $limit = 8): array
 
 function get_all_activities(int $userId): array
 {
-    $stmt = db()->prepare(
+    $stmt = tracker_db()->prepare(
         'SELECT a.id, a.activity_date, a.quantity, a.carbon_kg, a.notes,
                 at.category, at.name, at.unit
          FROM activities a
@@ -205,7 +205,7 @@ function get_all_activities(int $userId): array
 
 function get_top_recommendation(int $userId): ?array
 {
-    $stmt = db()->prepare(
+    $stmt = tracker_db()->prepare(
         'SELECT at.category, at.recommendation, SUM(a.carbon_kg) AS total
          FROM activities a
          INNER JOIN activity_types at ON at.id = a.activity_type_id
