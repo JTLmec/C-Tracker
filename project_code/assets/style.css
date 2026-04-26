@@ -1,13 +1,13 @@
 :root {
-    --bg: #071311;
-    --surface: rgba(16, 32, 29, 0.74);
-    --surface-strong: rgba(11, 24, 22, 0.92);
-    --text: #edf6f2;
-    --muted: #9db5ab;
-    --line: rgba(191, 224, 212, 0.14);
-    --primary: #7fd0ad;
-    --primary-dark: #5bb58f;
-    --accent: #e6c98d;
+    --bg: #15181d;
+    --surface: rgba(39, 45, 54, 0.74);
+    --surface-strong: rgba(28, 33, 40, 0.92);
+    --text: #edf1f6;
+    --muted: #aeb6c1;
+    --line: rgba(194, 201, 212, 0.16);
+    --primary: #bcc5d3;
+    --primary-dark: #9da8b9;
+    --accent: #d7dbe2;
     --danger: #ff867e;
     --success: #8be1a9;
     --shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
@@ -24,9 +24,9 @@ html {
 body {
     margin: 0;
     background:
-        radial-gradient(circle at top left, rgba(71, 133, 112, 0.24), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(230, 201, 141, 0.12), transparent 28%),
-        linear-gradient(180deg, #081614 0%, #09110f 48%, #08100f 100%);
+        radial-gradient(circle at top left, rgba(148, 163, 184, 0.22), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(203, 213, 225, 0.12), transparent 30%),
+        linear-gradient(180deg, #171b22 0%, #151921 48%, #141820 100%);
     color: var(--text);
     font-family: Inter, Arial, Helvetica, sans-serif;
     line-height: 1.5;
@@ -53,7 +53,7 @@ a:hover {
 
 .site-header {
     backdrop-filter: blur(18px);
-    background: rgba(8, 17, 15, 0.68);
+    background: rgba(20, 24, 31, 0.72);
     border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
@@ -94,9 +94,9 @@ a:hover {
 }
 
 .brand-mark {
-    background: linear-gradient(180deg, rgba(127, 208, 173, 0.95), rgba(230, 201, 141, 0.72));
+    background: linear-gradient(180deg, rgba(188, 197, 211, 0.95), rgba(167, 178, 196, 0.72));
     border-radius: 999px;
-    box-shadow: 0 0 24px rgba(127, 208, 173, 0.2);
+    box-shadow: 0 0 24px rgba(188, 197, 211, 0.2);
     display: inline-block;
     height: 28px;
     width: 8px;
@@ -236,7 +236,7 @@ input,
 select,
 textarea {
     width: 100%;
-    border: 1px solid rgba(191, 224, 212, 0.18);
+    border: 1px solid rgba(194, 201, 212, 0.2);
     border-radius: 6px;
     color: var(--text);
     font: inherit;
@@ -251,17 +251,17 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-    outline: 3px solid rgba(127, 208, 173, 0.15);
+    outline: 3px solid rgba(188, 197, 211, 0.2);
     border-color: var(--primary);
 }
 
 optgroup {
-    color: #10231d;
+    color: #1f2937;
     font-weight: 700;
 }
 
 option {
-    color: #10231d;
+    color: #1f2937;
 }
 
 .button,
@@ -270,7 +270,7 @@ button.button {
     background: linear-gradient(180deg, var(--primary), var(--primary-dark));
     border: 0;
     border-radius: 6px;
-    color: #052019;
+    color: #111827;
     cursor: pointer;
     display: inline-flex;
     font: inherit;
@@ -316,7 +316,7 @@ button.button {
 
 .hero-band {
     align-items: end;
-    background: linear-gradient(135deg, rgba(22, 48, 42, 0.86), rgba(11, 24, 22, 0.92));
+    background: linear-gradient(135deg, rgba(43, 51, 63, 0.86), rgba(26, 31, 38, 0.92));
     border: 1px solid var(--line);
     border-radius: 8px;
     display: grid;
@@ -329,7 +329,7 @@ button.button {
 }
 
 .hero-band::after {
-    background: linear-gradient(90deg, rgba(127, 208, 173, 0.12), transparent 35%, rgba(230, 201, 141, 0.12));
+    background: linear-gradient(90deg, rgba(188, 197, 211, 0.14), transparent 35%, rgba(167, 178, 196, 0.12));
     content: '';
     inset: 0;
     pointer-events: none;
@@ -541,6 +541,23 @@ tbody tr:hover {
     display: grid;
     gap: 12px;
     margin-top: 24px;
+}
+
+.typical-values {
+    margin-top: 24px;
+}
+
+.typical-values h3 {
+    margin: 0 0 8px;
+}
+
+.typical-values p {
+    margin: 0 0 14px;
+}
+
+.typical-values th,
+.typical-values td {
+    padding: 10px 8px;
 }
 
 .auth-copy {

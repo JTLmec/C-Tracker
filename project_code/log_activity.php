@@ -3,11 +3,53 @@ require_once __DIR__ . '/includes/functions.php';
 
 $user = require_login();
 $activityTypeGroups = get_activity_type_groups();
+$activityTypes = get_activity_types();
 $errors = [];
 $activityDate = date('Y-m-d');
 $activityTypeId = '';
 $quantity = '';
 $notes = '';
+
+$activityTypeByName = [];
+foreach ($activityTypes as $type) {
+    $activityTypeByName[$type['name']] = $type;
+}
+
+$typicalPresets = [
+    ['name' => 'Car travel', 'quantity' => 20],
+    ['name' => 'Electric car travel', 'quantity' => 20],
+    ['name' => 'Jeepney / shared minibus', 'quantity' => 20],
+    ['name' => 'Train / rail', 'quantity' => 20],
+    ['name' => 'Electricity use', 'quantity' => 8],
+    ['name' => 'LPG / cooking gas use', 'quantity' => 0.3],
+    ['name' => 'Meat-based meal', 'quantity' => 1],
+    ['name' => 'Plant-based meal', 'quantity' => 1],
+    ['name' => 'Beef', 'quantity' => 0.15],
+    ['name' => 'Chicken', 'quantity' => 0.15],
+    ['name' => 'Mixed household waste', 'quantity' => 1],
+    ['name' => 'Food waste (landfilled)', 'quantity' => 0.5],
+    ['name' => 'Hot water use (heated electrically)', 'quantity' => 30],
+];
+
+$typicalValues = [];
+foreach ($typicalPresets as $preset) {
+    $type = $activityTypeByName[$preset['name']] ?? null;
+
+    if (!$type) {
+        continue;
+    }
+
+    $quantityValue = (float) $preset['quantity'];
+    $factorValue = (float) $type['emission_factor'];
+
+    $typicalValues[] = [
+        'category' => $type['category'],
+        'name' => $type['name'],
+        'quantity' => $quantityValue,
+        'unit' => $type['unit'],
+        'carbon_kg' => round($quantityValue * $factorValue, 2),
+    ];
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_valid_csrf();
@@ -160,6 +202,38 @@ require __DIR__ . '/includes/header.php';
                 <strong>Quick habit comparison</strong>
             </div>
         </div>
+
+        <?php if ($typicalValues): ?>
+            <div class="typical-values">
+                <h3>Typical values (quick guide)</h3>
+                <p class="muted">
+                    These sample quantities can help users decide what to enter for each activity.
+                </p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Typical quantity</th>
+                                <th>Est. CO2e</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($typicalValues as $item): ?>
+                                <tr>
+                                    <td>
+                                        <strong><?= e($item['name']) ?></strong>
+                                        <div class="table-subtle"><?= e(ucfirst($item['category'])) ?></div>
+                                    </td>
+                                    <td><?= e(rtrim(rtrim(number_format($item['quantity'], 2, '.', ''), '0'), '.')) ?> <?= e($item['unit']) ?></td>
+                                    <td><?= e(format_kg($item['carbon_kg'])) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php endif; ?>
     </aside>
 </section>
 
