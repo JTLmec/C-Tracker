@@ -270,7 +270,7 @@ button.button {
     background: linear-gradient(180deg, var(--primary), var(--primary-dark));
     border: 0;
     border-radius: 6px;
-    color: #111827;
+    color: #ffffff;
     cursor: pointer;
     display: inline-flex;
     font: inherit;
@@ -309,9 +309,9 @@ button.button {
 }
 
 .alert-success {
-    background: rgba(62, 130, 82, 0.16);
-    border: 1px solid rgba(139, 225, 169, 0.3);
-    color: var(--success);
+    background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+    border: 1px solid rgba(91, 181, 143, 0.52);
+    color: #ffffff;
 }
 
 .hero-band {
