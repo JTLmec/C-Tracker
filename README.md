@@ -64,10 +64,12 @@ php -S localhost:8000
 ```
 
 ### Database Config
-- Update `project_code/config.php` to set two connections:
+- Copy the template and store credentials outside code:
+  - `cp .env.example .env.local`
+- Set values in `.env.local`:
   - `AUTH_DB_*` for the `users` table.
   - `TRACKER_DB_*` for `activities` and `activity_types`.
-- You can keep both pointed to the same database, or split them into separate databases.
+- If `TRACKER_DB_*` is blank, the app reuses `AUTH_DB_*` values.
 
 ### What You Need
 - **Web Browser**: Chrome, Firefox, Safari, etc.
