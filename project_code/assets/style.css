@@ -1,13 +1,13 @@
 :root {
-    --bg: #15181d;
-    --surface: rgba(39, 45, 54, 0.74);
-    --surface-strong: rgba(28, 33, 40, 0.92);
-    --text: #edf1f6;
-    --muted: #aeb6c1;
-    --line: rgba(194, 201, 212, 0.16);
-    --primary: #bcc5d3;
-    --primary-dark: #9da8b9;
-    --accent: #d7dbe2;
+    --bg: #edf1f5;
+    --surface: rgba(255, 255, 255, 0.9);
+    --surface-strong: rgba(255, 255, 255, 0.96);
+    --text: #1f2937;
+    --muted: #5f6b7a;
+    --line: rgba(31, 41, 55, 0.14);
+    --primary: #7fd0ad;
+    --primary-dark: #5bb58f;
+    --accent: #5bb58f;
     --danger: #ff867e;
     --success: #8be1a9;
     --shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
@@ -24,9 +24,9 @@ html {
 body {
     margin: 0;
     background:
-        radial-gradient(circle at top left, rgba(148, 163, 184, 0.22), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(203, 213, 225, 0.12), transparent 30%),
-        linear-gradient(180deg, #171b22 0%, #151921 48%, #141820 100%);
+        radial-gradient(circle at top left, rgba(127, 208, 173, 0.14), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(148, 163, 184, 0.14), transparent 30%),
+        linear-gradient(180deg, #f2f5f8 0%, #edf1f5 52%, #e9edf2 100%);
     color: var(--text);
     font-family: Inter, Arial, Helvetica, sans-serif;
     line-height: 1.5;
@@ -53,7 +53,7 @@ a:hover {
 
 .site-header {
     backdrop-filter: blur(18px);
-    background: rgba(20, 24, 31, 0.72);
+    background: rgba(243, 246, 249, 0.78);
     border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
@@ -94,9 +94,9 @@ a:hover {
 }
 
 .brand-mark {
-    background: linear-gradient(180deg, rgba(188, 197, 211, 0.95), rgba(167, 178, 196, 0.72));
+    background: linear-gradient(180deg, rgba(127, 208, 173, 0.95), rgba(91, 181, 143, 0.72));
     border-radius: 999px;
-    box-shadow: 0 0 24px rgba(188, 197, 211, 0.2);
+    box-shadow: 0 0 24px rgba(127, 208, 173, 0.25);
     display: inline-block;
     height: 28px;
     width: 8px;
@@ -119,7 +119,7 @@ a:hover {
 
 .nav-links a.is-active,
 .nav-links a:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(31, 41, 55, 0.06);
     border-color: var(--line);
     color: var(--text);
     text-decoration: none;
@@ -127,7 +127,7 @@ a:hover {
 
 .user-chip {
     align-items: center;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(31, 41, 55, 0.06);
     border: 1px solid var(--line);
     border-radius: 999px;
     color: var(--text);
@@ -241,7 +241,7 @@ textarea {
     color: var(--text);
     font: inherit;
     padding: 11px 12px;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.88);
 }
 
 textarea {
@@ -316,7 +316,7 @@ button.button {
 
 .hero-band {
     align-items: end;
-    background: linear-gradient(135deg, rgba(43, 51, 63, 0.86), rgba(26, 31, 38, 0.92));
+    background: linear-gradient(135deg, rgba(240, 244, 248, 0.96), rgba(229, 236, 243, 0.98));
     border: 1px solid var(--line);
     border-radius: 8px;
     display: grid;
@@ -329,7 +329,7 @@ button.button {
 }
 
 .hero-band::after {
-    background: linear-gradient(90deg, rgba(188, 197, 211, 0.14), transparent 35%, rgba(167, 178, 196, 0.12));
+    background: linear-gradient(90deg, rgba(127, 208, 173, 0.14), transparent 35%, rgba(148, 163, 184, 0.12));
     content: '';
     inset: 0;
     pointer-events: none;
@@ -372,7 +372,7 @@ button.button {
 .hero-meta div,
 .auth-notes div,
 .help-list div {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(31, 41, 55, 0.04);
     border: 1px solid var(--line);
     border-radius: 8px;
     padding: 14px 16px;
@@ -450,7 +450,7 @@ button.button {
 }
 
 .bar-track {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(31, 41, 55, 0.08);
     border-radius: 999px;
     height: 12px;
     overflow: hidden;
@@ -467,7 +467,7 @@ button.button {
 }
 
 .category-pill {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(31, 41, 55, 0.06);
     border: 1px solid var(--line);
     border-radius: 999px;
     color: var(--text);
