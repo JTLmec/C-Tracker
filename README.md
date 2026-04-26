@@ -1,155 +1,102 @@
-# C-Tracker: Your Personal Carbon Footprint Tracker
+# C-Tracker
 
-A simple yet powerful web application that helps you track, understand, and reduce your environmental impact through daily activity logging and smart insights.
+C-Tracker is a PHP + MySQL web app for logging daily activities and estimating carbon emissions (kg CO2e).  
+This project started as a school build and is now deployed on AWS.
 
-## 🌍 Live Demo
+## Live Links
 
-- **AWS Application**: (URL intentionally omitted)
-- **GitHub Pages**: https://jethertolentino.github.io/c-tracker (redirects to AWS)
+- AWS app: URL intentionally omitted
+- GitHub Pages redirect: `https://JTLmec.github.io/C-Tracker/`
 
-## 🚀 What It Does
+## What the app does
 
-### Track Your Daily Impact
-- **Log Activities**: Record your travel, electricity use, meals, and more
-- **Calculate Emissions**: Automatically converts activities to CO₂ equivalent
-- **Visualize Trends**: See your environmental impact over time
-- **Get Smart Tips**: Personalized suggestions for reducing your footprint
+- User registration and login
+- Activity logging with automatic CO2e calculation
+- Dashboard totals and category breakdown
+- Activity history with delete action
+- Recommendations based on highest-impact category
 
-### Why It Matters
-- **Climate Awareness**: Understand your personal environmental impact
-- **Progress Tracking**: Watch your positive changes over time
-- **Actionable Insights**: Get specific recommendations that actually help
-- **Community Impact**: Join others in making a difference
+## Tech stack
 
-## 🛠️ How It's Built
+- PHP 8.3
+- MySQL (AWS RDS in production)
+- Apache (EC2)
+- Vanilla CSS
 
-### The Web Stack
-- **PHP 8.3**: Powers the application logic and user interactions
-- **MySQL Database**: Stores all your activity data securely
-- **Apache Server**: Serves the application to the world
-- **Responsive CSS**: Works perfectly on phones, tablets, and desktops
+## Project structure
 
-### The Cloud Setup
-- **AWS EC2**: The virtual computer running your app
-- **AWS RDS**: Managed database service (no server maintenance needed)
-- **GitHub Pages**: Free domain and SSL certificate
-- **Custom Domain**: Professional web address for your project
+- `project_code/` — PHP pages, includes, styles
+- `database/` — SQL schema + seed data
+- `index.html` — GitHub Pages redirect
 
-## � What's Inside
+## Local setup
 
-### Your Data Structure
-- **Users**: Your account info and login details
-- **Activities**: Every carbon footprint entry you log
-- **Activity Types**: Pre-built categories (travel, food, electricity, etc.)
+1) Clone:
 
-### Smart Calculations
-- **Science-Based**: Uses real emission factors
-- **Automatic**: Converts your activities to CO₂ equivalent
-- **Instant**: See impact as soon as you log it
-
-## � Getting Started
-
-### Try It Live
-- **Web App**: (URL intentionally omitted)
-- **GitHub Pages**: https://jethertolentino.github.io/c-tracker
-
-### Run It Locally
 ```bash
-# Clone the project
-git clone https://github.com/jethertolentino/c-tracker.git
+git clone https://github.com/<your-github-username>/<your-repo-name>.git
+cd <your-repo-name>
+```
 
-# Start the local server
-cd c-tracker/project_code
+2) Create env file:
+
+```bash
+cp .env.example .env.local
+```
+
+3) Set DB values in `.env.local`.
+
+Simple setup (single DB):
+
+```env
+AUTH_DB_HOST=127.0.0.1
+AUTH_DB_NAME=carbon_tracker
+AUTH_DB_USER=root
+AUTH_DB_PASS=
+
+TRACKER_DB_HOST=
+TRACKER_DB_NAME=
+TRACKER_DB_USER=
+TRACKER_DB_PASS=
+```
+
+4) Import SQL:
+
+```bash
+mysql -u root -p < database/carbon_tracker.sql
+```
+
+5) Run:
+
+```bash
+cd project_code
 php -S localhost:8000
 ```
 
-### Database Config
-- Copy the template and store credentials outside code:
-  - `cp .env.example .env.local`
-- Set values in `.env.local`:
-  - `AUTH_DB_*` for the `users` table.
-  - `TRACKER_DB_*` for `activities` and `activity_types`.
-- If `TRACKER_DB_*` is blank, the app reuses `AUTH_DB_*` values.
+Open `http://localhost:8000/login.php`.
 
-### What You Need
-- **Web Browser**: Chrome, Firefox, Safari, etc.
-- **Internet Connection**: For live version
-- **Local Server**: PHP installed (for development)
+## Environment config
 
-## 🔒 Security & Privacy
+`project_code/config.php` supports two DB connections:
 
-### Your Data is Safe
-- **Secure Login**: Passwords are hashed and protected
-- **No Tracking**: We don't collect personal data beyond what you provide
-- **Session Security**: Your login sessions are encrypted
-- **Data Ownership**: All your data belongs to you
+- `AUTH_DB_*` → `users`
+- `TRACKER_DB_*` → `activity_types`, `activities`
 
-### Built-in Protection
-- **SQL Injection Prevention**: All database queries are protected
-- **Input Validation**: Every form field is validated
-- **XSS Protection**: User inputs are safely displayed
+If `TRACKER_DB_*` is blank, it reuses `AUTH_DB_*`.
 
-## 📱 Works Everywhere
+## Production notes (current)
 
-### On Any Device
-- **Mobile Friendly**: Perfect on phones and tablets
-- **Desktop Ready**: Great on laptops and computers
-- **Touch Optimized**: Easy to use with fingers or mouse
+- EC2 deploy path: `/var/www/html`
+- Runtime secrets are stored in `/var/www/html/.env.local` (not committed)
+- Restart Apache after deploy/config changes:
 
-### For Everyone
-- **Screen Reader Support**: Works with accessibility tools
-- **Keyboard Navigation**: Fully keyboard accessible
-- **Clear Design**: Easy to understand and navigate
+```bash
+sudo systemctl restart apache2
+```
 
-## 🔒 Your Data is Safe
+## Security notes
 
-### Secure by Design
-- **Protected Login**: Your password is safely hashed
-- **Session Security**: Your login stays private
-- **No Tracking**: We only store what you choose to share
-
-### Smart Protection
-- **SQL Injection Safe**: All database queries protected
-- **Input Validation**: Every form checked and cleaned
-- **XSS Prevention**: Your data displayed safely
-
-## � See Your Impact
-
-### Clear Dashboard
-- **Total Footprint**: Your overall environmental impact
-- **Activity Breakdown**: See what contributes most
-- **Progress Charts**: Visualize your improvement over time
-- **Smart Tips**: Get personalized eco-advice
-
-## 🚀 How It's Hosted
-
-### Professional Setup
-- **AWS Cloud**: Reliable, scalable hosting
-- **GitHub Pages**: Free custom domain and SSL
-- **Automatic Redirect**: Professional web address
-- **Global CDN**: Fast loading worldwide
-
-## 🌍 Making a Difference
-
-### Environmental Benefits
-- **Personal Awareness**: Understand your carbon impact
-- **Positive Change**: Track your reduction progress
-- **Community Impact**: Join others in climate action
-- **Educational Tool**: Learn while you track
-
-## 🎯 What Makes This Project Special
-
-### A Real Learning Experience
-- **School Project**: Built to learn and demonstrate web development
-- **Practical Impact**: Actually helps people understand their carbon footprint
-- **Modern Skills**: Uses current web technologies and best practices
-- **Portfolio Piece**: Shows what you can build from scratch
-
-### More Than Just Code
-- **Environmental Focus**: Addresses climate change awareness
-- **User-Centered**: Designed to be helpful and easy to use
-- **Complete Solution**: From database to deployment, fully functional
-
----
-
-**Track your footprint, understand your impact, make a difference! 🌍**
+- Passwords are hashed with PHP `password_hash`
+- Queries use PDO prepared statements
+- CSRF token checks on form submissions
+- Output escaping via `htmlspecialchars`
